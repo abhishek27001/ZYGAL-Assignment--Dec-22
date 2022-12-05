@@ -1,162 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vibrant Minds Assignment Test</title>
+    
+    <title>Zygal-Assignment-DEC2022</title>
     <style>
-		*
-		{
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
 
-		body, html
-		{
-			height: 100vh;
-			width: 100vw;
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			flex-direction: column;
-		}
+td,
+th {
+    border: 1px solid black;
+    padding: 10px 20px;
+    text-align: center;
+      font-size: 30px;
+}
+td{
+    background-color: white;
+}
 
-		.main-section
-		{
-			height: 500px;
-			width: 800px;
-		}
+th {
+    font-weight: bold;
+    background-color: whitesmoke;
+}
+#month,#year,input{
+    width: 250px;
+    height: 60px;
+    font-size: 20px;
+    text-align: left;
+    margin: 20px;
+    border: 1px solid black;
+    text-align: center;
 
-		.main-section .row
-		{
-			width: 100%;
-			height: calc(100% / 3);
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-		}
+}
+#month,#year{
+    cursor: pointer;
+}
 
-		.row.center
-		{
-			justify-content: center;
-		}
+ 
+#container{
+    width: flex;
+    justify-content: center;
+}
+#box{
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: column;
+}
 
-		.block
-		{
-			height: 100%;
-			width: 200px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
+#wrap-up-box {
+    display: flex;
+    justify-content: left;
+}
 
-		.block p
-		{
-			font-size: 20px;
-			color: black;
-		}
 
-		#block1
-		{
-			background: red;
-		}
+button{
+    background-color: rgb(69, 69, 255);
+    color: white;
+    width: 150px;
+    height: 60px;
+    font-size: 15px;
+    font-weight:bold;
+    padding: 10px;
+    text-align: left;
+    margin: 20px;
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
 
-		#block2
-		{
-			background: yellow;
-		}
+}
+input::placeholder{
+    color: black;
+    padding: 15px;
+    text-align: left;
+    font-size: 17px;
+    font-weight:540;
+}
 
-		#block3
-		{
-			background: green;
-		}
+@media only screen and (max-width: 600px) {
 
-		#block4
-		{
-			background: orange;
-		}
+   
+    td,th{
+    padding: 4px 2px;
+    text-align: center;
+    font-size: 20px;
+    }
+    #month, #year, input, button {
+        width: 140px;
+        height: 35px;
+        font-size: 15px;
+        margin: 10px;
+    }
+    #opt{
+        display: flex;
+        width: 100%;
+    }
 
-		.btn
-		{
-			padding: 10px;
-		}
-
-		.btn:first-child
-		{
-			margin-right: 10px;
-		}
-
-		.instruction-section
-		{
-			margin-bottom: 50px;
-		}
-
-		.instruction-section p
-		{
-			margin-bottom: 10px;
-			color: #000;
-			font-size: 18px;
-			font-weight: bold;
-		}
-
-		.instruction-section ul
-		{
-			font-size: 16px;
-			color: #000;
-			list-style: none;
-		}
-
-		.instruction-section ul li
-		{
-			margin-bottom: 10px;
-		}
-	
+}
     </style>
+
 </head>
+
 <body>
-    <body>
-        <div class="main-section">
-            
-            <div class="row">
-                <div id="block1" class="block">
-                    <p>1</p>
-                </div>
-                <div id="block2" class="block">
-                    <p>2</p>
-                </div>
+    <div id="container">
+        <div id="box">
+            <div id="wrap-up-box">
+                <select class="upper-boxes" id="month" onchange="print()">
+                    <option value="" disabled selected>Select Month</option>
+                </select>
+
+                <select class="upper-boxes" id="year" onchange="print1()">
+                    <option value="" disabled selected>Select Year</option>
+                </select>
             </div>
-    
-            <div class="row center">
-                <button class="btn">
-                    Anti-Clockwise
-                </button>
-                <button class="btn">
-                    Clockwise
-                </button>
+
+            <div id="calendar"></div>
+            <div id="foot">
+                <input type="text" id="input" class="footer" placeholder="Enter Any Date">
+                <button class="footer" onclick="func()">ENTER</button>
             </div>
-    
-            <div class="row">
-                <div id="block4" class="block">
-                    <p>4</p>
-                </div>
-                <div id="block3" class="block">
-                    <p>3</p>
-                </div>
-            </div>
-    
         </div>
-    
-        <script type="text/javascript">
-            
-            // Your code here
-    
-        </script>
-    
-    </body> 
+    </div>
+    <script>
+        let mo = document.getElementById('month');
+		let ya = document.getElementById('year');
+		for (let i = 1; i <= 12; i++) {
+			let option = document.createElement('option')
+			option.setAttribute("value", i);
+			option.setAttribute("id", i);
+			option.innerHTML = i;
+			mo.append(option)
+		}
+		for (let i = 1950; i < 2050; i++) {
+			let option = document.createElement('option')
+			option.setAttribute("value", i);
+			option.setAttribute("id", i);
+			option.innerHTML = i;
+			ya.append(option)
+		}
+		function createCalendar(elem, year, month) {
+
+			let mon = month - 1;
+			let d = new Date(year, mon);
+
+			let table = '<table><tr><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th><th>SUN</th></tr><tr>';
+			for (let i = 0; i < getDay(d); i++) {
+				table += '<td></td>';
+			}
+			while (d.getMonth() == mon) {
+				table += `<td id="${d.getDate()}55" style="background-color: white"> `+ d.getDate() + '</td>';
+				console.log(table)
+
+				if (getDay(d) % 7 == 6) {table += '</tr><tr>';
+				}
+
+				d.setDate(d.getDate() + 1);
+			}
+			if (getDay(d) != 0) {
+				for (let i = getDay(d); i < 7; i++) {
+					table += '<td></td>';
+				}
+			}
+			table += '</tr></table>';
+
+			elem.innerHTML = table;
+		}
+
+		function getDay(date) { 
+			let day = date.getDay();
+			if (day == 0) day = 7;
+			return day - 1;
+		}
+		let yar = 2022;
+		let mont = 1;
+		function print() {
+			mont = mo.value;
+			console.log(mont)
+			createCalendar(calendar, yar, mont);
+		}
+
+		function print1() {
+			yar = ya.value;
+			console.log(yar)
+			createCalendar(calendar, yar, mont);
+		}
+		createCalendar(calendar, yar, mont);
+		
+		function func(){
+			let input=document.getElementById('input').value;
+			let box=document.getElementById(input+"55");
+			console.log(box.style.backgroundColor)
+			if(box.style.backgroundColor=="white"){
+				box.style.backgroundColor="green"
+			}else if(box.style.backgroundColor=="green"){
+				box.style.backgroundColor="white"
+			}
+			document.getElementById('input').value="";
+		}
+    </script>
 </body>
+
 </html>
